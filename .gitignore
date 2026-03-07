@@ -1,0 +1,20 @@
+# Ambiente Virtual
+env_bot/
+venv/
+.venv/
+env/
+
+# Chaves de API e Segredos
+.env
+
+# Banco de Dados Vetorial (opcional, melhor o usuário gerar o seu)
+vector_db/
+
+# Arquivos do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos do Sistema
+.DS_Store
+Thumbs.db
