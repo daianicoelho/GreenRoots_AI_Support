@@ -1,4 +1,5 @@
  VerdeVida AI: High-Performance RAG Botanical Support Agent
+ 
 ![alt text](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 
 ![alt text](https://img.shields.io/badge/Framework-LangChain_LCEL-121212)
