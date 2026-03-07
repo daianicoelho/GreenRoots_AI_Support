@@ -6,6 +6,7 @@
 ![alt text](https://img.shields.io/badge/Inference-Groq_Llama_3.1-orange)
 
 ![alt text](https://img.shields.io/badge/Frontend-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+
 VerdeVida AI is a production-grade Retrieval-Augmented Generation (RAG) system designed for a specialized botanical e-commerce niche. It provides an intelligent, context-aware chat interface that handles customer inquiries about plant care, shipping logistics, and store policies using a proprietary knowledge base.
 
  System Architecture
