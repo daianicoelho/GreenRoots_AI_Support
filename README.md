@@ -1,6 +1,6 @@
  GreenRoots AI: High-Performance RAG Botanical Support Agent
 
- ![GreenRoots AI Preview](./docs/asset1.png).
+ ![GreenRoots AI Preview](./docs/new_asset.png).
  
 ![alt text](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 
