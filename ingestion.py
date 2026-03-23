@@ -40,6 +40,13 @@ def create_vector_db():
 
     # 5. Database Cleanup (Remove old version to avoid data duplication)
     if os.path.exists(db_directory):
+        confirm = input(
+            f"WARNING: This will permanently delete the existing database at '{db_directory}'. "
+            "Continue? (yes/no): "
+        )
+        if confirm.strip().lower() != "yes":
+            print("Operation cancelled.")
+            return
         print("Cleaning up old database version...")
         shutil.rmtree(db_directory)
 
