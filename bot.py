@@ -21,7 +21,7 @@ def run_bot():
         return
 
     # 2. INITIALIZE COMPONENTS
-    print("Initializing VerdeVida AI Engine...")
+    print("Initializing GreenRoots AI Engine...")
     
     # Local Embeddings
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
@@ -41,10 +41,10 @@ def run_bot():
     )
 
     # 3. PROMPT & CHAIN SETUP (LCEL)
-    template = """You are VerdeVida's Virtual Assistant, a botanical expert.
+    template = """You are GreenRoots' Virtual Assistant, a botanical expert.
     Answer the user's question ONLY based on the provided context. 
     Be polite, helpful, and use plant emojis.
-    If the answer is not in the context, ask them to contact support@verdevida.com.
+    If the answer is not in the context, ask them to contact support@greenroots.com.
 
     CONTEXT:
     {context}
@@ -64,7 +64,7 @@ def run_bot():
     )
 
     # 4. INTERACTIVE LOOP
-    print("\n🌿 VerdeVida AI Support is Ready!")
+    print("\n🌿 GreenRoots AI Support is Ready!")
     print("(Type 'exit' or 'quit' to stop the bot)\n")
 
     while True:

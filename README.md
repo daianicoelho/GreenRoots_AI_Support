@@ -1,6 +1,6 @@
- VerdeVida AI: High-Performance RAG Botanical Support Agent
+ GreenRoots AI: High-Performance RAG Botanical Support Agent
 
- ![VerdeVida AI Preview](./docs/asset1.png).
+ ![GreenRoots AI Preview](./docs/asset1.png).
  
 ![alt text](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 
@@ -10,7 +10,7 @@
 
 ![alt text](https://img.shields.io/badge/Frontend-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 
-VerdeVida AI is a production-grade Retrieval-Augmented Generation (RAG) system designed for a specialized botanical e-commerce niche. It provides an intelligent, context-aware chat interface that handles customer inquiries about plant care, shipping logistics, and store policies using a proprietary knowledge base.
+GreenRoots AI is a production-grade Retrieval-Augmented Generation (RAG) system designed for a specialized botanical e-commerce niche. It provides an intelligent, context-aware chat interface that handles customer inquiries about plant care, shipping logistics, and store policies using a proprietary knowledge base.
 
  System Architecture
  
@@ -46,8 +46,8 @@ A Groq Cloud API Key.
 
 Bash
 # Clone the repository
-git clone https://github.com/your-username/verdevida-ai.git
-cd verdevida-ai
+git clone https://github.com/your-username/greenroots-ai.git
+cd greenroots-ai
 # Install dependencies
 pip install -r requirements.txt
 

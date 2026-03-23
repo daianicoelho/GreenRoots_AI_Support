@@ -13,132 +13,203 @@ from langchain_core.output_parsers import StrOutputParser
 # 1. INITIAL CONFIGURATION
 load_dotenv()
 st.set_page_config(
-    page_title="VerdeVida AI | Support",
+    page_title="GreenRoots AI | Support",
     page_icon="🌿",
     layout="centered",
     initial_sidebar_state="expanded",
 )
 
-# --- PREMIUM VISUAL DESIGN (MOSS GREEN & OBSIDIAN DARK) ---
+# --- DESIGN SYSTEM (Inter · Fira Code · Forest Green / Dark Neutral) ---
 st.markdown("""
     <style>
-    /* Main Background */
+    /* ── TOKENS ────────────────────────────────────────────────────────
+       Primary   #18181E  #505058  #888890  #C0C0C8
+       Secondary #3A5010  #4A5218  #6A7035  #8A9045
+       Neutral   #080808  #1E1E28  #383848  #585868  #909098  #B8B8C0  #D8D8E0
+       Accent    #1A4820  #204830  #2A5828  #387858  #408865
+    ── ──────────────────────────────────────────────────────────────── */
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+    /* GLOBAL */
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif !important;
+        color: #D8D8E0;
+    }
+    code, pre, .stCode, [data-testid="stCodeBlock"] {
+        font-family: 'Fira Code', monospace !important;
+    }
+
+    /* APP BACKGROUND */
     .stApp {
-        background-color: #0E1117;
-        color: #FFFFFF;
+        background-color: #18181E;
+        color: #D8D8E0;
     }
 
-    /* Main Title */
+    /* MAIN TITLE */
     .main-title {
-        color: #8DAA71;
-        font-family: 'Georgia', serif;
+        color: #8A9045;
+        font-family: 'Inter', sans-serif !important;
         font-weight: 700;
+        font-size: 1.75rem;
+        letter-spacing: -0.02em;
         text-align: center;
-        padding: 10px;
-        margin-top: -30px;
-        margin-bottom: 20px;
+        padding: 8px 0;
+        margin-top: -24px;
+        margin-bottom: 24px;
     }
 
-    /* SIDEBAR — always visible, cannot be collapsed */
+    /* SIDEBAR */
     [data-testid="stSidebar"] {
-        background-color: #0A0D10 !important;
-        border-right: 2px solid #35421C !important;
+        background-color: #1E1E28 !important;
+        border-right: 1px solid #383848 !important;
         transform: translateX(0) !important;
         min-width: 244px !important;
         visibility: visible !important;
     }
-
-    /* Hide both the close-sidebar and open-sidebar toggle buttons */
     [data-testid="stSidebarCollapseButton"],
     [data-testid="collapsedControl"] {
         display: none !important;
     }
-    
-    /* Sidebar Image Centering */
     [data-testid="stSidebar"] [data-testid="stImage"] {
         display: flex;
         justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
     }
-
-    /* Hide fullscreen button */
     button[title="View fullscreen"],
     [data-testid="StyledFullScreenButton"] {
         display: none !important;
     }
 
-    /* Sidebar Buttons Style */
-    .stButton>button {
-        background-color: #1A1E14 !important;
-        color: #8DAA71 !important;
-        border: 1px solid #35421C !important;
+    /* SIDEBAR DIVIDER */
+    [data-testid="stSidebar"] hr {
+        border-color: #383848 !important;
+    }
+
+    /* NAV BUTTONS */
+    .stButton > button {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+        background-color: #1E1E28 !important;
+        color: #B8B8C0 !important;
+        border: 1px solid #383848 !important;
+        border-radius: 8px !important;
         width: 100% !important;
-        border-radius: 10px !important;
-        margin-bottom: 10px !important;
-        transition: 0.3s;
+        padding: 8px 16px !important;
+        margin-bottom: 8px !important;
+        text-align: left !important;
+        transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     }
-    .stButton>button:hover {
-        background-color: #35421C !important;
-        color: #FFFFFF !important;
-        border: 1px solid #8DAA71 !important;
+    .stButton > button:hover {
+        background-color: #2A5828 !important;
+        border-color: #408865 !important;
+        color: #D8D8E0 !important;
     }
 
-    /* CHAT INPUT CUSTOMIZATION */
+    /* CHAT INPUT */
     [data-testid="stChatInput"] {
-        border: 1px solid #35421C !important;
-        border-radius: 15px !important;
-        background-color: #1A1E14 !important;
+        background-color: #1E1E28 !important;
+        border: 1px solid #383848 !important;
+        border-radius: 12px !important;
     }
-
+    [data-testid="stChatInput"]:focus-within {
+        border-color: #408865 !important;
+        box-shadow: 0 0 0 2px rgba(64,136,101,0.2) !important;
+    }
     [data-testid="stChatInput"] textarea {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
         background-color: transparent !important;
-        color: #FFFFFF !important;
+        color: #D8D8E0 !important;
         border: none !important;
     }
-
-    /* CHAT BUBBLES - Assistant */
-    [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) {
-        background-color: #111A12 !important;
-        border: 1px solid #35421C !important;
-        border-radius: 15px;
-        margin-bottom: 10px;
+    [data-testid="stChatInput"] textarea::placeholder {
+        color: #585868 !important;
     }
 
-    /* CHAT BUBBLES - User */
+    /* CHAT BUBBLES — Assistant */
+    [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) {
+        background-color: #1E1E28 !important;
+        border: 1px solid #383848 !important;
+        border-radius: 12px !important;
+        padding: 12px 16px !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* CHAT BUBBLES — User */
     [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
-        background-color: #161B22 !important;
-        border: 1px solid #24292F !important;
-        border-radius: 15px;
-        margin-bottom: 10px;
+        background-color: #252532 !important;
+        border: 1px solid #383848 !important;
+        border-radius: 12px !important;
+        padding: 12px 16px !important;
+        margin-bottom: 12px !important;
     }
 
     /* SUGGESTION BUTTONS */
     .suggestion-btn > button {
-        background-color: #111A12 !important;
-        color: #8DAA71 !important;
-        border: 1px dashed #35421C !important;
-        border-radius: 10px !important;
+        font-family: 'Inter', sans-serif !important;
         font-size: 0.85rem !important;
-        padding: 6px 10px !important;
-        margin-bottom: 6px !important;
+        font-weight: 400 !important;
+        background-color: #1E1E28 !important;
+        color: #8A9045 !important;
+        border: 1px solid #383848 !important;
+        border-radius: 8px !important;
+        padding: 8px 12px !important;
+        margin-bottom: 8px !important;
         width: 100% !important;
         text-align: left !important;
-        transition: 0.2s;
+        transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     }
     .suggestion-btn > button:hover {
-        background-color: #35421C !important;
-        border-color: #8DAA71 !important;
-        color: #FFFFFF !important;
+        background-color: #204830 !important;
+        border-color: #408865 !important;
+        color: #D8D8E0 !important;
     }
 
-    /* CHAR COUNTER */
-    .char-counter {
-        text-align: right;
-        font-size: 0.75rem;
-        color: #555;
-        margin-top: -8px;
-        margin-bottom: 4px;
+    /* EXPANDERS (Plant Care Guide) */
+    [data-testid="stExpander"] {
+        background-color: #1E1E28 !important;
+        border: 1px solid #383848 !important;
+        border-radius: 8px !important;
+        margin-bottom: 8px !important;
+    }
+    [data-testid="stExpander"] summary {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 600 !important;
+        color: #B8B8C0 !important;
+    }
+
+    /* INFO / WARNING BOXES */
+    .stAlert {
+        border-radius: 8px !important;
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    /* CAPTION / SECONDARY TEXT */
+    .stCaption, [data-testid="stCaptionContainer"] {
+        color: #585868 !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* HINT TEXT (empty state) */
+    .hint-text {
+        text-align: center;
+        color: #585868;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        margin-top: 24px;
+        margin-bottom: 16px;
+    }
+
+    /* CHAT INPUT FOOTER — match app background */
+    [data-testid="stBottom"],
+    [data-testid="stBottom"] > div,
+    .stChatFloatingInputContainer,
+    .stChatFloatingInputContainer > div {
+        background-color: #18181E !important;
+        border-top: none !important;
+        box-shadow: none !important;
     }
 
     header {visibility: hidden;}
@@ -152,11 +223,12 @@ _MAX_INPUT_LENGTH = 500
 
 @st.cache_resource
 def init_bot():
-    api_key = os.getenv("GROQ_API_KEY")
+    # Support both local .env and Streamlit Cloud secrets
+    api_key = os.getenv("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY", "")
     if not api_key:
         raise ValueError(
             "GROQ_API_KEY not configured. "
-            "Create a .env file based on .env.example and add your key."
+            "Add it to .env locally or to Streamlit Cloud secrets."
         )
 
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
@@ -172,10 +244,10 @@ def init_bot():
         temperature=0
     )
 
-    template = """You are VerdeVida's Virtual Assistant, a botanical expert.
+    template = """You are GreenRoots' Virtual Assistant, a botanical expert.
     Answer the user's question ONLY based on the provided context. 
     Be polite, helpful, and use plant emojis.
-    If the answer is not in the context, ask them to contact support@verdevida.com.
+    If the answer is not in the context, ask them to contact support@greenroots.com.
 
     CONTEXT:
     {context}
@@ -204,7 +276,7 @@ def navigate_to(page_name):
 # --- FIXED SIDEBAR (CLEAN VERSION) ---
 _NAV_LABELS = {
     'chat':  '🏠 Home - Chat',
-    'about': '📖 About VerdeVida',
+    'about': '📖 About GreenRoots',
     'guide': '🌵 Plant Care Guide',
 }
 
@@ -213,7 +285,7 @@ with st.sidebar:
     with col2:
         st.image("https://cdn-icons-png.flaticon.com/512/628/628283.png", width=100)
 
-    st.markdown("<h2 style='text-align: center; color: #8DAA71;'>VerdeVida Menu</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: #8A9045; font-family: Inter, sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: -0.01em;'>GreenRoots</h2>", unsafe_allow_html=True)
     st.divider()
 
     for _page, _label in _NAV_LABELS.items():
@@ -234,7 +306,7 @@ with st.sidebar:
 
 # 4. MAIN CONTENT ROUTING
 if st.session_state.page == 'chat':
-    st.markdown("<h1 class='main-title'>🌿 VerdeVida AI Support</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='main-title'>🌿 GreenRoots AI Support</h1>", unsafe_allow_html=True)
 
     if not os.path.exists(_DB_PATH):
         st.error("Vector Database not found! Please run 'python ingestion.py' first.")
@@ -248,7 +320,7 @@ if st.session_state.page == 'chat':
     _SUGGESTIONS = [
         "🌱 How often should I water my Peace Lily?",
         "☀️ Which plants are best for low-light rooms?",
-        "🚚 What is VerdeVida's shipping policy?",
+        "🚚 What is GreenRoots' shipping policy?",
     ]
 
     if os.path.exists(_DB_PATH) and 'bot' in dir() and bot is not None:
@@ -258,8 +330,7 @@ if st.session_state.page == 'chat':
         # Empty state: show suggestions when no messages yet
         if not st.session_state.messages:
             st.markdown(
-                "<p style='text-align:center; color:#555; margin-top:20px;'>"
-                "Not sure what to ask? Try one of these:</p>",
+                "<p class='hint-text'>Not sure what to ask? Try one of these:</p>",
                 unsafe_allow_html=True,
             )
             for _suggestion in _SUGGESTIONS:
@@ -300,7 +371,7 @@ if st.session_state.page == 'chat':
 elif st.session_state.page == 'about':
     st.markdown("<h1 class='main-title'>About Us</h1>", unsafe_allow_html=True)
     st.write("""
-    VerdeVida is a technology-driven botanical boutique. 
+    GreenRoots is a technology-driven botanical boutique. 
     Our mission is to bridge the gap between nature and modern living through 
     expert knowledge and high-quality indoor plants.
     """)
